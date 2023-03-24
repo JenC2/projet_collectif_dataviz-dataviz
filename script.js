@@ -25,34 +25,34 @@
 
 // let devise = document.getElementById("devise")
 
-// let from = document.getElementById("from");
-// let to = document.getElementById("to");
-// let amount = document.getElementById("amount");
-// let result = document.getElementById("result");
-// let button = document.getElementById("send");
+ let from = document.getElementById("from");
+ let to = document.getElementById("to");
+ let amount = document.getElementById("amount");
+ let result = document.getElementById("result");
+ let button = document.getElementById("send");
 
-// button.addEventListener("click", getRates) 
+ button.addEventListener("click", getRates) 
 
-// async function getRates() {
-//     let fromCurrency = from.value;
-//     let toCurrency = to.value;
-//     let amountCurrency = amount.value;
+ async function getRates() {
+     let fromCurrency = from.value;
+     let toCurrency = to.value;
+     let amountCurrency = amount.value;
+  
+     const key = "8e6de312f853558d57237b5ffe9f9618";
+     const requestString= `https://api.currencybeacon.com/v1/convert?from=${fromCurrency}&to=${toCurrency}&amount=${amountCurrency}&api_key=${key}`;
+     const dataRates = await fetch(requestString);
+     console.log(dataRates);
+
+     let responseRates = await dataRates.json();
+     console.log(responseRates);
+
+
+     result.textContent = `${amountCurrency} ${fromCurrency} = ${responseRates.response.value} ${toCurrency}`;
     
-//     const key = "8e6de312f853558d57237b5ffe9f9618";
-//     const requestString= `https://api.currencybeacon.com/v1/convert?from=${fromCurrency}&to=${toCurrency}&amount=${amountCurrency}&api_key=${key}`;
-//     const dataRates = await fetch(requestString);
-//     console.log(dataRates);
+} 
+ getRates();
 
-//     let responseRates = await dataRates.json();
-//     console.log(responseRates);
 
-//     result.textContent= responseRates.response.value;
-    
-//     // devise.textContent=`${responseRates.response.rates.USD}$`
-
-// } 
-
-// getRates();
 
 let city = document.getElementById("city");
 let date = document.getElementById("date");
@@ -78,18 +78,75 @@ async function getWeather() {
     let responseWeather = await dataWeather.json();
     console.log(responseWeather);
 
-    date.textContent = `Date:${responseWeather.location.localtime}`;
-    humidity.textContent = `Humidity:${responseWeather.current.humidity}`;
-    wind.textContent = `Wind:${responseWeather.current.wind_kph}`;
-    uv.textContent = `UV:${responseWeather.current.uv}`;
-    temperature.textContent = `Temperature:${responseWeather.current.temp_c}°C`;
-    icon.src = responseWeather.current.condition.icon;
+    useWeatherData(responseWeather);
+
+    // date.textContent = `Date:${responseWeather.location.localtime}`;
+    // humidity.textContent = `Humidity:${responseWeather.current.humidity}`;
+    // wind.textContent = `Wind:${responseWeather.current.wind_kph}`;
+    // uv.textContent = `UV:${responseWeather.current.uv}`;
+    // temperature.textContent = `Temperature:${responseWeather.current.temp_c}°C`;
+    // icon.src = responseWeather.current.condition.icon;
 } 
 
 
-getWeather();
+function useWeatherData (responseWeather) {
 
-let places = document.getElementById("places")
+    const weatherContainer = document.querySelector(".weatherBlock");
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style = "width: 18rem;";
+
+    const cardBody = document.createElement("div");
+    cardBody.className = "card-body";
+    card.appendChild(cardBody);
+
+    const city = document.createElement("h5");
+    city.className = "city-name";
+    city.textContent = responseWeather.location.name;
+    cardBody.appendChild(city)
+
+    const image = document.createElement("img");
+    image.className = "icon";
+    image.src = responseWeather.current.condition.icon;
+    cardBody.appendChild(image);
+
+    const date = document.createElement("p");
+    date.className = "date";
+    date.textContent = responseWeather.location.localtime;
+    cardBody.appendChild(date);
+
+    const humidity = document.createElement("p");
+    humidity.className = "humidity";
+    humidity.textContent = `Humidity: ${responseWeather.current.humidity}%`;
+    cardBody.appendChild(humidity);
+
+    const wind = document.createElement("p");
+    wind.className = "wind";
+    wind.textContent = `Wind: ${responseWeather.current.wind_kph} kph`;
+    cardBody.appendChild(wind);
+
+    const uv = document.createElement("p");
+    uv.className = "uv";
+    uv.textContent = `UV: ${responseWeather.current.uv}`;
+    cardBody.appendChild(uv);
+    
+    const temperature = document.createElement("p");
+    temperature.className = "temperature";
+    temperature.textContent = `Temperature: ${responseWeather.current.temp_c} °`;
+    cardBody.appendChild(temperature);
+    
+    weatherContainer.appendChild(card);
+}
+
+// useWeatherData(responseWeather);
+    
+
+
+
+// getWeather();
+
+let places = document.getElementById("places");
 let buttonPlaces = document.getElementById("btnplaces");
 
 buttonPlaces.addEventListener("click", getPlaces)
@@ -98,7 +155,7 @@ buttonPlaces.addEventListener("click", getPlaces)
 async function getPlaces() {
 
     // let cityWeather = city.value;
-    const placesSearch = places.value
+    const placesSearch = places.value;
     const key = "5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f";
     // const requestString= "https://api.opentripmap.com/0.1/en/places/xid/R4682064?apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f";
     const requestString =`https://geocode.maps.co/search?q=${placesSearch}`;
@@ -147,8 +204,15 @@ async function getPlaces() {
     let responseVP = await dataVP.json();
     console.log(responseVP);
 
+    
+
+    const requestHostels = `https://api.opentripmap.com/0.1/en/places/radius?radius=5000&lon=${longitude}&lat=${latitude}&kinds=hostels&limit=20&apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
+    const dataHostels = await fetch(requestHostels);
+    console.log(dataHostels);
+    let responseHostels = await dataHostels.json();
+    console.log(responseHostels);
+
 }
 
+
 getPlaces();
-
-
