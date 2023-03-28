@@ -1,34 +1,42 @@
+    const map = L.map('map').setView([0, 0], 12);
+      
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+      
+// --------------Currency functino-------------------
+ let from = document.getElementById("from");
+ let to = document.getElementById("to");
+ let amount = document.getElementById("amount");
+ let result = document.getElementById("result");
+ let button = document.getElementById("send");
 
-//  let from = document.getElementById("from");
-//  let to = document.getElementById("to");
-//  let amount = document.getElementById("amount");
-//  let result = document.getElementById("result");
-//  let button = document.getElementById("send");
+ button.addEventListener("click", getRates) 
 
-//  button.addEventListener("click", getRates) 
-
-//  async function getRates() {
-//      let fromCurrency = from.value;
-//      let toCurrency = to.value;
-//      let amountCurrency = amount.value;
+ async function getRates() {
+     let fromCurrency = from.value;
+     let toCurrency = to.value;
+     let amountCurrency = amount.value;
   
-//      const key = "8e6de312f853558d57237b5ffe9f9618";
-//      const requestString= `https://api.currencybeacon.com/v1/convert?from=${fromCurrency}&to=${toCurrency}&amount=${amountCurrency}&api_key=${key}`;
-//      const dataRates = await fetch(requestString);
-//      console.log(dataRates);
+     const key = "8e6de312f853558d57237b5ffe9f9618";
+     const requestString= `https://api.currencybeacon.com/v1/convert?from=${fromCurrency}&to=${toCurrency}&amount=${amountCurrency}&api_key=${key}`;
+     const dataRates = await fetch(requestString);
+     console.log(dataRates);
 
-//      let responseRates = await dataRates.json();
-//      console.log(responseRates);
+     let responseRates = await dataRates.json();
+     console.log(responseRates);
 
 
-//      result.textContent = `${amountCurrency} ${fromCurrency} = ${responseRates.response.value} ${toCurrency}`;
+     result.textContent = `${amountCurrency} ${fromCurrency} = ${responseRates.response.value} ${toCurrency}`;
     
-// } 
-//  getRates();
+} 
+ getRates();
 
 
 let city = document.getElementById("city");
 let search = document.getElementById("search");
+
 
 // ---------- weather function -------------
 
@@ -38,170 +46,96 @@ let search = document.getElementById("search");
 // let uv = document.getElementById("uv");
 // let temperature = document.getElementById("temperature");
 // let icon = document.getElementById("icon");
-// search.addEventListener("click", getWeather);
-
-// Museums
+search.addEventListener("click", getWeather);
 
 
+async function getWeather() {
 
+    let cityWeather = city.value;
 
-// async function getWeather() {
+    const requestString= `https://api.weatherapi.com/v1/current.json?key=f5cf8d804b794358b43131840232203&q=${cityWeather}&aqi=no`;
+    const dataWeather = await fetch(requestString);
+    console.log(dataWeather);
 
-//     let cityWeather = city.value;
+    let responseWeather = await dataWeather.json();
+    console.log(responseWeather);
 
-//     const key = "f5cf8d804b794358b43131840232203";
-//     const requestString= `https://api.weatherapi.com/v1/current.json?key=f5cf8d804b794358b43131840232203&q=${cityWeather}&aqi=no`;
-//     const dataWeather = await fetch(requestString);
-//     console.log(dataWeather);
-
-//     let responseWeather = await dataWeather.json();
-//     console.log(responseWeather);
-
-//     useWeatherData(responseWeather);
-
-    // date.textContent = `Date:${responseWeather.location.localtime}`;
-    // humidity.textContent = `Humidity:${responseWeather.current.humidity}`;
-    // wind.textContent = `Wind:${responseWeather.current.wind_kph}`;
-    // uv.textContent = `UV:${responseWeather.current.uv}`;
-    // temperature.textContent = `Temperature:${responseWeather.current.temp_c}°C`;
-    // icon.src = responseWeather.current.condition.icon;
-// } 
-
-
-// function useWeatherData (responseWeather) {
-
-//     const weatherContainer = document.querySelector(".weatherBlock");
-
-//     const card = document.createElement("div");
-//     card.className = "card";
-//     card.style = "width: 18rem;";
-
-//     const cardBody = document.createElement("div");
-//     cardBody.className = "card-body";
-//     card.appendChild(cardBody);
-
-//     const city = document.createElement("h5");
-//     city.className = "city-name";
-//     city.textContent = responseWeather.location.name;
-//     cardBody.appendChild(city)
-
-//     const image = document.createElement("img");
-//     image.className = "icon";
-//     image.src = responseWeather.current.condition.icon;
-//     cardBody.appendChild(image);
-
-//     const date = document.createElement("p");
-//     date.className = "date";
-//     date.textContent = responseWeather.location.localtime;
-//     cardBody.appendChild(date);
-
-//     const humidity = document.createElement("p");
-//     humidity.className = "humidity";
-//     humidity.textContent = `Humidity: ${responseWeather.current.humidity}%`;
-//     cardBody.appendChild(humidity);
-
-//     const wind = document.createElement("p");
-//     wind.className = "wind";
-//     wind.textContent = `Wind: ${responseWeather.current.wind_kph} kph`;
-//     cardBody.appendChild(wind);
-
-//     const uv = document.createElement("p");
-//     uv.className = "uv";
-//     uv.textContent = `UV: ${responseWeather.current.uv}`;
-//     cardBody.appendChild(uv);
+    useWeatherData(responseWeather);
     
-//     const temperature = document.createElement("p");
-//     temperature.className = "temperature";
-//     temperature.textContent = `Temperature: ${responseWeather.current.temp_c} °`;
-//     cardBody.appendChild(temperature);
+} 
+
+
+function useWeatherData (responseWeather) {
+
+    const weatherContainer = document.querySelector(".weatherBlock");
+    weatherContainer.innerHTML = '';
     
-//     weatherContainer.appendChild(card);
-// }
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style = "width: 18rem;";
 
-// useWeatherData(responseWeather);
+    const cardBody = document.createElement("div");
+    cardBody.className = "card-body";
+    card.appendChild(cardBody);
+
+    const city = document.createElement("h5");
+    city.className = "city-name";
+    city.textContent = responseWeather.location.name;
+    cardBody.appendChild(city)
+
+    const image = document.createElement("img");
+    image.className = "icon";
+    image.src = responseWeather.current.condition.icon;
+    cardBody.appendChild(image);
+
+    const date = document.createElement("p");
+    date.className = "date";
+    date.textContent = responseWeather.location.localtime;
+    cardBody.appendChild(date);
+
+    const humidity = document.createElement("p");
+    humidity.className = "humidity";
+    humidity.textContent = `Humidity: ${responseWeather.current.humidity}%`;
+    cardBody.appendChild(humidity);
+
+    const wind = document.createElement("p");
+    wind.className = "wind";
+    wind.textContent = `Wind: ${responseWeather.current.wind_kph} kph`;
+    cardBody.appendChild(wind);
+
+    const uv = document.createElement("p");
+    uv.className = "uv";
+    uv.textContent = `UV: ${responseWeather.current.uv}`;
+    cardBody.appendChild(uv);
     
+    const temperature = document.createElement("p");
+    temperature.className = "temperature";
+    temperature.textContent = `Temperature: ${responseWeather.current.temp_c} °`;
+    cardBody.appendChild(temperature);
+    
+    weatherContainer.appendChild(card);
+}
 
-
-//
-
-// getWeather();
-
-// let places = document.getElementById("places");
-// let buttonPlaces = document.getElementById("btnplaces");
-
-// buttonPlaces.addEventListener("click", getPlaces)
-
-
-// async function getPlaces() {
-
-//     // let cityWeather = city.value;
-//     const placesSearch = places.value;
-//     const key = "5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f";
-//     // const requestString= "https://api.opentripmap.com/0.1/en/places/xid/R4682064?apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f";
-//     const requestString =`https://geocode.maps.co/search?q=${placesSearch}`;
-//     const dataPlaces = await fetch(requestString);
-//     console.log(dataPlaces);
-
-//     let responsePlaces = await dataPlaces.json();
-//     console.log(responsePlaces);
-
-
-//     const latitude = responsePlaces[0].lat;
-//     const longitude = responsePlaces[0].lon;
-
-//     console.log(latitude);
-//     console.log(longitude);
-
-//     // const requestUrl = `https://api.opentripmap.com/0.1/en/places/radius?radius=50&lon=${longitude}&lat=${latitude}&src_geom=wikidata&src_attr=wikidata&kinds=interesting_places&limit=50&apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
-//     // const requestUrl = `https://api.opentripmap.com/0.1/en/places/radius?radius=1000&lon=${longitude}&lat=${latitude}&kinds=interesting_places&limit=30&apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
-//     const requestMuseums = `https://api.opentripmap.com/0.1/en/places/radius?radius=5000&lon=${longitude}&lat=${latitude}&kinds=museums&rate=3&limit=20&apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
-//     const dataMuseums = await fetch(requestMuseums);
-//     console.log(dataMuseums);
-//     let responseMuseums = await dataMuseums.json();
-//     console.log(responseMuseums);
-
-//     const requestFood = `https://api.opentripmap.com/0.1/en/places/radius?radius=5000&lon=${longitude}&lat=${latitude}&kinds=foods&rate=3&limit=20&apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
-//     const dataFood = await fetch(requestFood);
-//     console.log(dataFood);
-//     let responseFood = await dataFood.json();
-//     console.log(responseFood);
-
-//     const requestArchitecture = `https://api.opentripmap.com/0.1/en/places/radius?radius=2000&lon=${longitude}&lat=${latitude}&kinds=architecture&rate=3&limit=20&apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
-//     const dataArchitecture = await fetch(requestArchitecture);
-//     console.log(dataArchitecture);
-//     let responseArchitecture = await dataArchitecture.json();
-//     console.log(responseArchitecture);
-
-//     const requestBeach = `https://api.opentripmap.com/0.1/en/places/radius?radius=100000&lon=${longitude}&lat=${latitude}&kinds=beaches&limit=20&apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
-//     const dataBeach = await fetch(requestBeach);
-//     console.log(dataBeach);
-//     let responseBeach = await dataBeach.json();
-//     console.log(responseBeach);
-
-//     const requestVP = `https://api.opentripmap.com/0.1/en/places/radius?radius=1000000&lon=${longitude}&lat=${latitude}&kinds=view_points&rate=3&limit=20&apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
-//     const dataVP = await fetch(requestVP);
-//     console.log(dataVP);
-//     let responseVP = await dataVP.json();
-//     console.log(responseVP);
-
-//     const requestHostels = `https://api.opentripmap.com/0.1/en/places/radius?radius=5000&lon=${longitude}&lat=${latitude}&kinds=hostels&limit=20&apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
-//     const dataHostels = await fetch(requestHostels);
-//     console.log(dataHostels);
-//     let responseHostels = await dataHostels.json();
-//     console.log(responseHostels);
-
-// }
-
-
-// getPlaces();
 
 const museum = document.getElementById("museum");
+
 museum.addEventListener("click", getMuseum);
 
+museum.addEventListener("click", function() {
+  const mapSection = document.querySelector("#map");
+  mapSection.style.height = "100%";
+  mapSection.style.width = "100%";
+});
 
 async function getMuseum() {
 
     let cityMuseum = city.value;
+
+    let myIcon = L.icon({
+        iconUrl:'img/museum-marker.png',
+        iconSize: [50, 50],
+        iconAnchor: [25, 25],
+    });
   
     const requestString =`https://geocode.maps.co/search?q=${cityMuseum}`;
     const dataPlaces = await fetch(requestString);
@@ -216,7 +150,7 @@ async function getMuseum() {
     console.log(latitude);
     console.log(longitude);
 
-    const requestMuseums = `https://api.opentripmap.com/0.1/en/places/radius?radius=5000&lon=${longitude}&lat=${latitude}&kinds=museums&rate=3&limit=9&apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
+    const requestMuseums = `https://api.opentripmap.com/0.1/en/places/radius?radius=5000&lon=${longitude}&lat=${latitude}&kinds=museums&rate=3&limit=8&apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
     const dataMuseums = await fetch(requestMuseums);
     console.log(dataMuseums);
     let responseMuseums = await dataMuseums.json();
@@ -224,21 +158,20 @@ async function getMuseum() {
     
     console.log(responseMuseums);
 
-    const museumContainer = document.querySelector(".museum");
+    const museumContainer = document.querySelector("#activities-left");
     museumContainer.innerHTML = '';
 
      for( let i = 0; responseMuseums.features.length; i++ ) {
-        
-    const xid = responseMuseums.features[i].properties.xid;
-    console.log(xid);
 
-    
+       
+    const xid = responseMuseums.features[i].properties.xid;
+    console.log(xid);    
 
     const requestMuseumsAll = `https://api.opentripmap.com/0.1/en/places/xid/${xid}?apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
     const dataMuseumsAll = await fetch(requestMuseumsAll);
     console.log(dataMuseumsAll);
     let responseMuseumsAll = await dataMuseumsAll.json();
-    console.log(responseMuseumsAll);
+    console.log(responseMuseumsAll);     
 
     const card = document.createElement("div");
     card.className = "card";
@@ -297,11 +230,19 @@ async function getMuseum() {
     cardLink.appendChild(linkOtm);
 
     museumContainer.appendChild(card);
-        
 
-     }
+    const latMarker = responseMuseumsAll.point.lat;
+    const lonMarker = responseMuseumsAll.point.lon;
+
+    const marker = L.marker([latMarker,lonMarker], {icon: myIcon}).addTo(map);
     
+    marker.setLatLng([latMarker,lonMarker]);
+    marker.bindPopup(`${responseMuseumsAll.name}`).openPopup();
+    map.setView([latMarker,lonMarker], 14);
+    map._onResize();
+    }
     
+
 }
 
 getMuseum();
@@ -310,10 +251,21 @@ getMuseum();
 const food = document.getElementById("food");
 food.addEventListener("click", getFood);
 
+food.addEventListener("click", function() {
+  const mapSection = document.querySelector("#map");
+  mapSection.style.height = "100%";
+  mapSection.style.width = "100%";
+});
 
 async function getFood() {
 
     let cityFood = city.value;
+
+    let myIcon = L.icon({
+        iconUrl:'/img/food-marker.png',
+        iconSize: [50, 50],
+        iconAnchor: [25, 25],
+    });
   
     const requestString =`https://geocode.maps.co/search?q=${cityFood}`;
     const dataPlaces = await fetch(requestString);
@@ -336,15 +288,13 @@ async function getFood() {
     
     console.log(responseFood);
 
-    const foodContainer = document.querySelector(".food");
+    const foodContainer = document.querySelector("#activities-left");
     foodContainer.innerHTML = '';
 
      for( let i = 0; responseFood.features.length; i++ ) {
         
     const xid = responseFood.features[i].properties.xid;
     console.log(xid);
-
-    
 
     const requestFoodAll = `https://api.opentripmap.com/0.1/en/places/xid/${xid}?apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
     const dataFoodAll = await fetch(requestFoodAll);
@@ -409,22 +359,39 @@ async function getFood() {
     cardLink.appendChild(linkOtm);
 
     foodContainer.appendChild(card);
+
+    const latMarker = responseFoodAll.point.lat;
+    const lonMarker = responseFoodAll.point.lon;
+
+    const marker = L.marker([latMarker,lonMarker], {icon: myIcon}).addTo(map);
+    
+    marker.setLatLng([latMarker,lonMarker]);
+    marker.bindPopup(`${responseFoodAll.name}`).openPopup();
+    map.setView([latMarker,lonMarker], 14);
+    map._onResize();
      }
-    
-    
 }
 
 getFood();
 
-
-
 const arc = document.getElementById("arc");
 arc.addEventListener("click", getArc);
+arc.addEventListener("click", function() {
+    const mapSection = document.querySelector("#map");
+    mapSection.style.height = "100%";
+    mapSection.style.width = "100%";
+  });
 
 
 async function getArc() {
 
     let cityArc = city.value;
+
+    let myIcon = L.icon({
+        iconUrl:'img/arc-marker.png',
+        iconSize: [50, 50],
+        iconAnchor: [25, 25],
+    });
   
     const requestString =`https://geocode.maps.co/search?q=${cityArc}`;
     const dataPlaces = await fetch(requestString);
@@ -443,19 +410,15 @@ async function getArc() {
     const dataArc = await fetch(requestArc);
     console.log(dataArc);
     let responseArc = await dataArc.json();
-
-    
     console.log(responseArc);
 
-    const arcContainer = document.querySelector(".arc");
+    const arcContainer = document.querySelector("#activities-left");
     arcContainer.innerHTML = '';
 
      for( let i = 0; responseArc.features.length; i++ ) {
         
     const xid = responseArc.features[i].properties.xid;
     console.log(xid);
-
-    
 
     const requestArcAll = `https://api.opentripmap.com/0.1/en/places/xid/${xid}?apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
     const dataArcAll = await fetch(requestArcAll);
@@ -520,25 +483,40 @@ async function getArc() {
     cardLink.appendChild(linkOtm);
 
     arcContainer.appendChild(card);
+
+    const latMarker = responseArcAll.point.lat;
+    const lonMarker = responseArcAll.point.lon;
+
+    const marker = L.marker([latMarker,lonMarker], {icon: myIcon}).addTo(map);
+    
+    marker.setLatLng([latMarker,lonMarker]);
+    marker.bindPopup(`${responseArcAll.name}`).openPopup();
+    map.setView([latMarker,lonMarker], 14);
+    map._onResize();
+    
      }
-    
-    
 }
 
 getArc();
 
-
-
-
-
-
 const beach = document.getElementById("beach");
 beach.addEventListener("click", getBeach);
+beach.addEventListener("click", function() {
+    const mapSection = document.querySelector("#map");
+    mapSection.style.height = "100%";
+    mapSection.style.width = "100%";
+  });
 
 
 async function getBeach() {
 
     let cityBeach = city.value;
+    
+    let myIcon = L.icon({
+        iconUrl:'img/beach-marker.png',
+        iconSize: [50, 50],
+        iconAnchor: [25, 25],
+})
   
     const requestString =`https://geocode.maps.co/search?q=${cityBeach}`;
     const dataPlaces = await fetch(requestString);
@@ -561,15 +539,13 @@ async function getBeach() {
     
     console.log(responseBeach);
 
-    const beachContainer = document.querySelector(".beach");
+    const beachContainer = document.querySelector("#activities-left");
     beachContainer.innerHTML = '';
 
      for( let i = 0; responseBeach.features.length; i++ ) {
         
     const xid = responseBeach.features[i].properties.xid;
     console.log(xid);
-
-    
 
     const requestBeachAll = `https://api.opentripmap.com/0.1/en/places/xid/${xid}?apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
     const dataBeachAll = await fetch(requestBeachAll);
@@ -580,12 +556,6 @@ async function getBeach() {
     const card = document.createElement("div");
     card.className = "card";
     card.style = "width:18rem;"
-
-    // const image = document.createElement("img");
-    // image.className = "card-img-top";
-    // image.src = responseBeachAll.preview.source;
-    // card.appendChild(image);
-    // console.log(image);
 
     const cardBody = document.createElement("div");
     cardBody.className = "card-body";
@@ -634,21 +604,40 @@ async function getBeach() {
     cardLink.appendChild(linkOtm);
 
     beachContainer.appendChild(card);
+    
+    const latMarker = responseBeachAll.point.lat;
+    const lonMarker = responseBeachAll.point.lon;
+
+    const marker = L.marker([latMarker,lonMarker], {icon: myIcon}).addTo(map);
+    
+    marker.setLatLng([latMarker,lonMarker]);
+    marker.bindPopup(`${responseBeachAll.name}`).openPopup();
+    map.setView([latMarker,lonMarker], 14);
+    map._onResize();
+    
      }
     
-    
-}
+    }
 
 getBeach();
 
 
 const vp = document.getElementById("vp");
 vp.addEventListener("click", getVp);
-
+vp.addEventListener("click", function() {
+    const mapSection = document.querySelector("#map");
+    mapSection.style.height = "100%";
+    mapSection.style.width = "100%";
+  });
 
 async function getVp() {
 
     let cityVp = city.value;
+    let myIcon = L.icon({
+        iconUrl:'img/vp-marker.png',
+        iconSize: [50, 50],
+        iconAnchor: [25, 25],
+})
   
     const requestString =`https://geocode.maps.co/search?q=${cityVp}`;
     const dataPlaces = await fetch(requestString);
@@ -671,15 +660,13 @@ async function getVp() {
     
     console.log(responseVp);
 
-    const vpContainer = document.querySelector(".vp");
+    const vpContainer = document.querySelector("#activities-left");
     vpContainer.innerHTML = '';
 
      for( let i = 0; responseVp.features.length; i++ ) {
         
     const xid = responseVp.features[i].properties.xid;
     console.log(xid);
-
-    
 
     const requestVpAll = `https://api.opentripmap.com/0.1/en/places/xid/${xid}?apikey=5ae2e3f221c38a28845f05b6c8cb92f0bc450453b786ce4566a0e18f`
     const dataVpAll = await fetch(requestVpAll);
@@ -744,6 +731,16 @@ async function getVp() {
     cardLink.appendChild(linkOtm);
 
     vpContainer.appendChild(card);
+
+    const latMarker = responseVpAll.point.lat;
+    const lonMarker = responseVpAll.point.lon;
+
+    const marker = L.marker([latMarker,lonMarker], {icon: myIcon}).addTo(map);
+    
+    marker.setLatLng([latMarker,lonMarker]);
+    marker.bindPopup(`${responseVpAll.name}`).openPopup();
+    map.setView([latMarker,lonMarker], 14);
+    map._onResize();
      }
     
     
@@ -751,15 +748,23 @@ async function getVp() {
 
 getVp();
 
-
-
-
 const hostel = document.getElementById("hostel");
 hostel.addEventListener("click", getHostel);
+hostel.addEventListener("click", function() {
+    const mapSection = document.querySelector("#map");
+    mapSection.style.height = "100%";
+    mapSection.style.width = "100%";
+  });
+
 
 async function getHostel() {
 
     let cityHostel = city.value;
+    let myIcon = L.icon({
+        iconUrl:'img/hostels-marker.png',
+        iconSize: [50, 50],
+        iconAnchor: [25, 25],
+    });
   
     const requestString =`https://geocode.maps.co/search?q=${cityHostel}`;
     const dataPlaces = await fetch(requestString);
@@ -782,7 +787,7 @@ async function getHostel() {
     
     console.log(responseHostel);
 
-    const hostelContainer = document.querySelector(".hostel");
+    const hostelContainer = document.querySelector("#activities-left");
     hostelContainer.innerHTML = '';
 
      for( let i = 0; responseHostel.features.length; i++ ) {
@@ -801,12 +806,6 @@ async function getHostel() {
     const card = document.createElement("div");
     card.className = "card";
     card.style = "width:18rem;"
-
-    // const image = document.createElement("img");
-    // image.className = "card-img-top";
-    // image.src = responseHostelAll.preview.source;
-    // card.appendChild(image);
-    // console.log(image);
 
     const cardBody = document.createElement("div");
     cardBody.className = "card-body";
@@ -855,8 +854,17 @@ async function getHostel() {
     cardLink.appendChild(linkOtm);
 
     hostelContainer.appendChild(card);
-     }
+
+    const latMarker = responseHostelAll.point.lat;
+    const lonMarker = responseHostelAll.point.lon;
     
+    const marker = L.marker([latMarker,lonMarker], {icon: myIcon}).addTo(map);
+    
+    marker.setLatLng([latMarker,lonMarker]);
+    marker.bindPopup(`${responseHostelAll.name}`).openPopup();
+    map.setView([latMarker,lonMarker], 14);
+    map._onResize();
+     }
     
 }
 

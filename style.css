@@ -1,20 +1,33 @@
-nav {
-    background-color: rgb(207 250 254);
+.navbar-brand{
+    margin-left: 120px;
+    
 }
 
+nav {
+    background-color: white;
+    padding: 20px 20px;
+}
+
+.carousel {
+    display: flex;
+    justify-content: center;
+}
 .banner {
     display: flex;
-    width: 100%;
+    width: 80%;
     height: 550px;
+    border-radius: 20px;
+    margin-bottom: 30px;
   }
-  
+
   .left {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 40%;
     font-size: 60px;
-    background-color: aqua;
+    border-radius: 20px 0px 0px 20px;
+    background-color: rgb(253 244 255);
   }
   
   .left-inner-ttle {
@@ -29,6 +42,7 @@ nav {
   .right img {
   height: 550px;
   object-fit: cover;
+  border-radius: 0px 20px 20px 0px;
   }
 
 
@@ -37,12 +51,11 @@ nav {
     width: 100%;
 }
 
-
 .currency-weather {
     display: flex;
     height: 500px;
     width: 100%;
-    background-color: beige
+    background-color: purple;
 }
 
 #currencyBlock {
@@ -51,13 +64,14 @@ nav {
     align-items: center;
     text-align: center;
     flex-direction: column;
-    height: 400px;
+    height: 500px;
     width: 50%;
     background-color: aqua;
 }
 
 .weatherBlock {
 width: 50%;
+background-color: orange;
 }
 
 #currencyBlock h1 {
@@ -91,3 +105,51 @@ width: 50%;
     min-height: 500px;
     background-color: blue;
 }
+
+.museum {
+display: flex;
+}
+
+.activities-button {
+    background-color: red;
+}
+
+#activities-left {
+    background: yellow;
+    width: 30%;
+    max-height: 500px;
+    width: 40%;
+    overflow: scroll;
+}
+
+#activities-left::-webkit-scrollbar {
+    width: 10px;
+}
+
+#activities-left::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#activities-left::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+#activities-left::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#activities-right {
+    background-color: green;
+    width: 70%;
+    height: 500px;
+
+}
+
+#map { 
+    height: 0px;
+ }
+
+ #map {
+  transition: height 0.5s ease;
+}
+
