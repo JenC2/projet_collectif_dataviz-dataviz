@@ -3,9 +3,13 @@
     
 }
 
+.nav {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
 nav {
     background-color: white;
-    padding: 20px 20px;
 }
 
 .carousel {
@@ -53,25 +57,59 @@ nav {
 
 .currency-weather {
     display: flex;
+    justify-content: space-around;
+    align-content: center;
     height: 500px;
     width: 100%;
-    background-color: purple;
+    background-color: rgb(250 232 255);
 }
 
+.currency {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+
 #currencyBlock {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 400px;
+    height: 400px;
+    border: 1px solid rgb(232 121 249);
+    border-radius: 20px 20px;
+}
+
+#currencyBlock h1 {
+    margin: 20px;
+ }
+
+.weatherBlock {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     flex-direction: column;
-    height: 500px;
     width: 50%;
-    background-color: aqua;
 }
 
-.weatherBlock {
-width: 50%;
-background-color: orange;
+
+.card-weather {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px;
+    border: 1px solid rgb(232 121 249);
+    height: 400px;
+    width: 400px;
+    border-radius: 20px 20px;
+}
+
+.card-weather .card-body {
+    font-size: 15px;
 }
 
 #currencyBlock h1 {
@@ -94,52 +132,49 @@ background-color: orange;
 .searchBar {
     height: 60px;
     display: flex;
-    background-color: yellow;
     align-items: center;
     justify-content: center;
-    padding-top: 15px;
-
-}
-
-.activities {
-    min-height: 500px;
-    background-color: blue;
+    margin: 20px 20px;
 }
 
 .museum {
-display: flex;
+    display: flex;
+}
+.activities {
+    min-height: 500px;
+    background-color: rgb(250 232 255);
 }
 
+
 .activities-button {
-    background-color: red;
+    background-color: rgb(250 232 255);
+    height: 240px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.activities-button>* {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    border: none;
+    height: 180px;
+    width: 180px;
+    border-radius: 50% 50% 0 0;
+}
+
+activities-button:hover >* {
+    border: none;
 }
 
 #activities-left {
-    background: yellow;
-    width: 30%;
     max-height: 500px;
     width: 40%;
     overflow: scroll;
 }
 
-#activities-left::-webkit-scrollbar {
-    width: 10px;
-}
-
-#activities-left::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-#activities-left::-webkit-scrollbar-thumb {
-    background: #888;
-}
-
-#activities-left::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
 #activities-right {
-    background-color: green;
     width: 70%;
     height: 500px;
 
@@ -153,3 +188,43 @@ display: flex;
   transition: height 0.5s ease;
 }
 
+#museum {
+    background-image: url(/img/patrick-langwallner-TTz_H1FrdIc-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+#food {
+    background-image: url(/img/victoria-shes-90Z4qIxWc8Y-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+#arc{
+    background-image: url(/img/photo-1624724586264-aaa82432dd13.avif);
+    background-size: cover;
+    background-position: center;
+}
+
+#beach{
+    background-image: url(/img/jake-grella-scEd8Gap4SU-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+#vp{
+    background-image: url(img/byeong-woo-kang-JC1J-mrV3uA-unsplash1.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+#hostel{
+    background-image: url(/img/ralph-ravi-kayden-FqqiAvJejto-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.card {
+    width: 100%;
+    margin-bottom: 10px;
+}

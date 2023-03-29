@@ -69,10 +69,12 @@ function useWeatherData (responseWeather) {
 
     const weatherContainer = document.querySelector(".weatherBlock");
     weatherContainer.innerHTML = '';
+
     
     const card = document.createElement("div");
-    card.className = "card";
-    card.style = "width: 18rem;";
+    card.className = "card-weather";
+    // card.style.backgroundImage = "url('/img/kenrick-mills-1h2Pg97SXfA-unsplash.jpg')";
+    // card.style = "width: 18rem;";
 
     const cardBody = document.createElement("div");
     cardBody.className = "card-body";
@@ -175,7 +177,7 @@ async function getMuseum() {
 
     const card = document.createElement("div");
     card.className = "card";
-    card.style = "width:18rem;"
+    // card.style = "width:18rem;"
 
     const image = document.createElement("img");
     image.className = "card-img-top";

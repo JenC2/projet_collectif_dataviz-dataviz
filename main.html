@@ -22,12 +22,14 @@
 <body>                
   
   <!-- Image and text -->
+  <div class="nav">
 <nav class="navbar navbar-light">
   <a class="navbar-brand" href="#">
     <img src="img/voyage.png" width="50" height="50" class="d-inline-block align-center" alt="">
     Adventure Guides
   </a>
 </nav>
+</div>
 
 <section class="carousel">
 <div class="banner">
@@ -39,7 +41,6 @@
   </div>
 
   <div class="right">
-
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
       
       <div class="carousel-inner">
@@ -75,18 +76,19 @@
 </section>
 
     <div class="searchBar">
-      <div class="input-group col-6 mb-3">
+      <div class="input-group col-7 mb-3">
         <input type="text" class="form-control" placeholder="Where you want to go?" aria-label="Recipient's username" aria-describedby="button-addon2" id="city">
         <button class="btn btn-outline-secondary" type="button" id="search">Search</button>
       </div>
     </div>
 
   <section class="currency-weather">
+    
     <!-- BLOC CURRENCY -->
-
+    <div class="currency">
     <div id="currencyBlock">
-        <h1>CURRENCY</h1>
         <div class="d-flex flex-column mb-4 col-7">
+          <h1>CURRENCY</h1>
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Amount</span>
             <input id="amount" type="text" class="form-control" placeholder="1" aria-label="Username" aria-describedby="basic-addon1">
@@ -102,7 +104,7 @@
           <button id="send" type="button" class="btn btn-outline-info">Convert</button>
           <p id="result"></p>
         </div>
-     
+      </div>
     </div>
         <!-- BLOC WEATHER -->
         
@@ -121,8 +123,7 @@
     <button type ="button" class="btn btn-outline-warning" id="beach">Beaches</button>
     <button type ="button" class="btn btn-outline-warning" id="vp">View Points</button>
     <button type ="button" class="btn btn-outline-warning" id="hostel">Hostels</button>
-    </div>
-
+  </div>
   <section class="museum">
     <div id="activities-left"></div>
     <div id="activities-right"><div id="map"></div></div>
